@@ -1,1 +1,40 @@
-{     "devDependencies": {         "arangojs": "*",         "electron-lite": "kaizhu256/node-electron-lite#alpha",         "utility2": "kaizhu256/node-utility2#alpha"     },     "name":"npmtest-arangojs",     "homepage": "https://github.com/npmtest/node-npmtest-arangojs",     "repository": {         "type": "git",         "url": "https://github.com/npmtest/node-npmtest-arangojs.git"     },     "scripts": {         "build-ci": "utility2 shReadmeTest build_ci.sh"     },     "version": "0.0.1" }
+{
+    "author": "kai zhu <kaizhu256@gmail.com>",
+    "description": "test coverage for [arangojs (v5.6.0)](https://github.com/arangodb/arangojs) [![npm package](https://img.shields.io/npm/v/npmtest-arangojs.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-arangojs) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-arangojs.svg)](https://travis-ci.org/npmtest/node-npmtest-arangojs)",
+    "devDependencies": {
+        "arangojs": "*",
+        "electron-lite": "kaizhu256/node-electron-lite#alpha",
+        "utility2": "kaizhu256/node-utility2#alpha"
+    },
+    "engines": {
+        "node": ">=4.0"
+    },
+    "homepage": "https://github.com/npmtest/node-npmtest-arangojs",
+    "keywords": [
+        "coverage",
+        "test",
+        "arangojs"
+    ],
+    "license": "MIT",
+    "main": "lib.npmtest_arangojs.js",
+    "name": "npmtest-arangojs",
+    "nameAlias": "npmtest_arangojs",
+    "nameOriginal": "npmtest-arangojs",
+    "os": [
+        "darwin",
+        "linux"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/npmtest/node-npmtest-arangojs.git"
+    },
+    "scripts": {
+        "build-ci": "utility2 shReadmeTest build_ci.sh",
+        "env": "env",
+        "heroku-postbuild": "npm install \"kaizhu256/node-utility2#alpha\" && utility2 shDeployHeroku",
+        "postinstall": "[ ! -f npm_scripts.sh ] || ./npm_scripts.sh postinstall",
+        "start": "PORT=${PORT:-8080} utility2 start test.js",
+        "test": "(set -e; export PORT=$(utility2 shServerPortRandom); utility2 test test.js)"
+    },
+    "version": "0.0.1"
+}
