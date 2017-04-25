@@ -1,4 +1,7 @@
-# test coverage for  [arangojs (v5.6.0)](https://github.com/arangodb/arangojs)  [![npm package](https://img.shields.io/npm/v/npmtest-arangojs.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-arangojs) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-arangojs.svg)](https://travis-ci.org/npmtest/node-npmtest-arangojs)
+# npmtest-arangojs
+
+#### basic test coverage for  [arangojs (v5.6.1)](https://github.com/arangodb/arangojs)  [![npm package](https://img.shields.io/npm/v/npmtest-arangojs.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-arangojs) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-arangojs.svg)](https://travis-ci.org/npmtest/node-npmtest-arangojs)
+
 #### The official ArangoDB JavaScript driver.
 
 [![NPM](https://nodei.co/npm/arangojs.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/arangojs)
@@ -7,7 +10,7 @@
 |--:|:--|
 | coverage : | [![istanbul-coverage](https://npmtest.github.io/node-npmtest-arangojs/build/coverage.badge.svg)](https://npmtest.github.io/node-npmtest-arangojs/build/coverage.html/index.html)|
 | test-report : | [![test-report](https://npmtest.github.io/node-npmtest-arangojs/build/test-report.badge.svg)](https://npmtest.github.io/node-npmtest-arangojs/build/test-report.html)|
-| build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-arangojs/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-arangojs/tree/gh-pages/build)|
+| test-server-github : | [![github.com test-server](https://npmtest.github.io/node-npmtest-arangojs/GitHub-Mark-32px.png)](https://npmtest.github.io/node-npmtest-arangojs/build/app/index.html) | | build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-arangojs/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-arangojs/tree/gh-pages/build)|
 
 - [https://npmtest.github.io/node-npmtest-arangojs/build/coverage.html/index.html](https://npmtest.github.io/node-npmtest-arangojs/build/coverage.html/index.html)
 
@@ -51,7 +54,7 @@
     ],
     "dependencies": {
         "es6-error": "^4.0.1",
-        "http-errors": "^1.5.0",
+        "http-errors": "^1.6.1",
         "linkedlist": "^1.0.1",
         "multi-part": "^2.0.0",
         "retry": "^0.10.0",
@@ -60,32 +63,33 @@
     },
     "description": "The official ArangoDB JavaScript driver.",
     "devDependencies": {
-        "babel-cli": "6.22.2",
-        "babel-core": "6.22.1",
-        "babel-loader": "6.2.9",
+        "babel-cli": "6.24.0",
+        "babel-core": "6.24.0",
+        "babel-loader": "6.4.1",
         "babel-plugin-add-module-exports": "0.2.1",
-        "babel-plugin-transform-builtin-extend": "1.1.0",
-        "babel-plugin-transform-es2015-modules-commonjs": "6.22.0",
-        "babel-preset-es2015": "6.22.0",
+        "babel-plugin-transform-builtin-extend": "1.1.2",
+        "babel-plugin-transform-es2015-modules-commonjs": "6.24.0",
+        "babel-preset-es2015": "6.24.0",
         "babel-preset-stage-1": "6.22.0",
         "chai": "3.5.0",
         "core-js": "2.4.1",
-        "coveralls": "2.11.15",
+        "coveralls": "2.13.0",
         "istanbul": "0.4.5",
         "json-loader": "0.5.4",
         "mocha": "3.2.0",
-        "npm-run-all": "4.0.1",
-        "snazzy": "6.0.0",
-        "standard": "8.6.0",
-        "watch": "1.0.1",
-        "webpack": "1.14.0"
+        "npm-run-all": "4.0.2",
+        "snazzy": "7.0.0",
+        "standard": "10.0.0",
+        "watch": "1.0.2",
+        "webpack": "1.14.0",
+        "xunit-file": "1.0.0"
     },
     "directories": {
         "lib": "lib"
     },
     "dist": {
-        "shasum": "89f2d9321462c9f99b22e916a26502e03620666c",
-        "tarball": "https://registry.npmjs.org/arangojs/-/arangojs-5.6.0.tgz"
+        "shasum": "c51ca877f9d24e0796877528ca82cbecdb279c42",
+        "tarball": "https://registry.npmjs.org/arangojs/-/arangojs-5.6.1.tgz"
     },
     "files": [
         "lib/",
@@ -94,7 +98,7 @@
         "README.md",
         "LICENSE"
     ],
-    "gitHead": "e43bfc6df6e8d41607dc1978edabc883303bd4a9",
+    "gitHead": "125db50c3d5d71d44fa73598e0ae16e6fbe445da",
     "homepage": "https://github.com/arangodb/arangojs",
     "keywords": [
         "arango",
@@ -134,7 +138,9 @@
         "dist": "npm-run-all -p dist:*",
         "dist:browser": "webpack",
         "dist:node": "babel --compact false -d lib src",
-        "lint": "snazzy --verbose src/**/*.js test/**/*.js",
+        "jenkins": "npm run ci -- --timeout 0 --reporter xunit-file",
+        "lint": "standard --verbose src/**/*.js test/**/*.js | snazzy",
+        "preci": "npm install",
         "prepublish": "npm run lint && npm run dist && node -e 'require(\"./\");'",
         "test": "mocha --growl",
         "watch": "npm-run-all -p watch:*",
@@ -143,7 +149,8 @@
         "watch:test": "watch 'npm run lint && npm run test' ./src ./test"
     },
     "typings": "arangojs.d.ts",
-    "version": "5.6.0"
+    "version": "5.6.1",
+    "bin": {}
 }
 ```
 
